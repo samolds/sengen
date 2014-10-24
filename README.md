@@ -6,12 +6,16 @@ In one of my early CS classes, we built a random sentence generator in Java. I p
 
 Java
 ----
+```
 cd java
 javac GrammarMain.java
 java GrammarMain
+```
 
 
 Python
 ------
+```
 cd python
 python grammar_main.py
+```
