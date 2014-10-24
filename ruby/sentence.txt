@@ -1,10 +1,10 @@
 <s>::=<np> <vp>
 <np>::=<dp> <adjp> <n>|<pn>
-<pn>::=John|Jane|Sally|Spot|Fred|Elmo|Jesus|Jesse's Girl|God|Abraham Lincoln|Winnie the Pooh|Eminem|Joffrey|Joey|Lucas|The President|Scuba Steve|Napoleon|Thomas the Tank Engine|Ronald McDonald|
-<adjp>::=<adj>|<adj>|<adj>|<adj> <adjp>
-<adj>::=big|fat|green|wonderful|manly|hard|gangsta|chubby|depressed|disgusting|dank|sticky icky|greasy|enchanting|
-<dp>::=the|a|
-<n>::=dog|cat|man|father|mother|child|horse|pikmin|snake|fox|dinosaur|donkey|flute|tuba|doobie|donut|spinal cord|word|party|brick|tongue|
+<pn>::=John|Jane|Sally|Spot|Fred|Elmo|Jesus|Jesse's Girl|God|Abraham Lincoln|Winnie the Pooh|Eminem|Joffrey|Joey|Lucas|The President|Scuba Steve|Napoleon|Thomas the Tank Engine|Ronald McDonald
+<adjp>::=<adj>|<adj>|<adj> <adjp>
+<adj>::=big|fat|green|wonderful|manly|hard|gangsta|chubby|depressed|disgusting|dank|sticky icky|greasy|enchanting
+<dp>::=the|a
+<n>::=dog|cat|man|father|mother|child|horse|pikmin|snake|fox|dinosaur|donkey|flute|tuba|doobie|donut|spinal cord|word|party|brick|tongue
 <vp>::=<tv> <np>|<iv>
-<tv>::=hit|honored|kissed|helped|pushed|celebrated|+1'ed|liked|shot|licked|picked|played|booped|spooked|swirlied|nursed|enchanted|had|
+<tv>::=hit|honored|kissed|helped|pushed|celebrated|+1'ed|liked|shot|licked|picked|played|booped|spooked|swirlied|nursed|enchanted|had
 <iv>::=died|collapsed|laughed|wept|danced|played|clapped|understood|read|freaked OUT|pooped|deflated
