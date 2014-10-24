@@ -34,7 +34,7 @@ class GrammarMain:
                         for answer in answers:
                             print answer
                 except ValueError:
-                    print("that's not an integer")
+                    print "that's not an integer"
 
 
 GrammarMain()
