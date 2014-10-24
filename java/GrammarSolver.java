@@ -45,7 +45,7 @@ public class GrammarSolver {
 			throw new IllegalArgumentException("The given rule is not defined in your list.");
 		}
 		if (times < 0) {
-			throw new IllegalArgumentException("I can print something negative times.");
+			throw new IllegalArgumentException("I can't print something negative times.");
 		}
 		String[] phrases = new String[times];
 		for (int i = 0; i < times; i++) { // building the array of random grammars
