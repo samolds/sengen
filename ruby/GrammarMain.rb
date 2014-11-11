@@ -32,8 +32,8 @@ class GrammarMain
     done = false
     while !done do
       puts "\nAvailable symbols to generate are:"
-      puts solver.get_symbols()
-      print "What do you want generated (return to quit)? "
+      print solver.get_symbols()
+      print "\nWhat do you want generated (return to quit)? "
       target = gets.chomp()
       if target.length() == 0
         done = true

@@ -19,3 +19,9 @@ Python
 cd python
 python grammar_main.py
 ```
+
+Ruby
+----
+```
+cd ruby
+ruby GrammarMain.rb

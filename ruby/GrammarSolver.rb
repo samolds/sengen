@@ -1,69 +1,57 @@
 class GrammarSolver
   def initialize(grammar)
+    @sentence_tree = Hash.new
+    
     if grammar.length() == 0
-      puts "Grammar must not be empty." # Throw error
+      raise "Grammar must not be empty."
     end
     for gram in grammar
-      #puts gram
+      line = gram.split(pattern="::=")
+      grammar_rule = line[0]
+      if grammar_contains(grammar_rule)
+        raise "You have the same nonterminal defined  more than once."
+      end
+      grammar_match = line[1].strip().split(pattern=/[|]+/)
+      @sentence_tree.store(grammar_rule, grammar_match)
     end
   end
 
+  
   def grammar_contains(symbol)
-    return true
+    return @sentence_tree.has_key?(symbol)
   end
 
+  
   def generate(symbol, times)
+    if !grammar_contains(symbol)
+      raise "The given rule is not defined in your list."
+    end
+    if times < 0
+      raise "I can't print something negative times."
+    end
     phrases = Array.new
     for i in 0..times
-      phrases.push("Hello, this is a test")
+      phrases.push(generate_phrase("", symbol))
     end
     return phrases
   end
 
+
+  def generate_phrase(phrase, symbol)
+    if !grammar_contains(symbol)
+      phrase = phrase + " " + symbol
+    else
+      randnum = Random.rand(@sentence_tree[symbol].length())
+      symbols = @sentence_tree[symbol][randnum].split(pattern=/[ \t]+/)
+      for symbol in symbols
+        phrase = generate_phrase(phrase, symbol)
+      end
+    end
+    return phrase.strip()
+  end
+
+
   def get_symbols
-    return "symbols"
+    return @sentence_tree.keys().inspect()
   end
 end
-
-
-
-# __sentence_tree = {}
-# 
-# def __init__(self, grammar):
-#     if len(grammar) == 0:
-#         raise ValueError("Grammar must not be empty.")
-#     for gram in grammar:
-#         line = gram.split("::=")
-#         grammar_rule = line[0]
-#         if self.grammar_contains(grammar_rule):
-#             raise ValueError("You have the same nonterminal defined more than once.")
-#         grammar_match = re.split("[|]+", line[1].strip())
-#         self.__sentence_tree.update({grammar_rule: grammar_match})
-# 
-# def grammar_contains(self, symbol):
-#     return self.__sentence_tree.has_key(symbol)
-# 
-# def generate(self, symbol, times):
-#     if not self.grammar_contains(symbol):
-#         raise ValueError("The given rule is not defined in your list.")
-#     if times < 0:
-#         raise ValueError("I can't print something negative times.")
-#     phrases = []
-#     i = 0
-#     while (i < times):
-#         phrases.append(self.__generate_phrase("", symbol))
-#         i = i + 1
-#     return phrases
-# 
-# def __generate_phrase(self, phrase, symbol):
-#     if not self.grammar_contains(symbol):
-#         phrase = phrase + " " + symbol
-#     else:
-#         randnum = random.randint(0, len(self.__sentence_tree[symbol]) - 1)
-#         symbols = re.split("[ \t]+", self.__sentence_tree[symbol][randnum])
-#         for symbol in symbols:
-#             phrase = self.__generate_phrase(phrase, symbol)
-#     return phrase.strip()
-# 
-# def get_symbols(self):
-#     return ', '.join(self.__sentence_tree.keys())
