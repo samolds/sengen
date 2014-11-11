@@ -1,14 +1,21 @@
-class GrammarMain
+class GrammerMain
   def initialize
     puts "Welcome to the cse143 random sentence generator.\n"
     puts "What is the name of the grammar file? "
     filename = gets.chomp()
-    # grammar = []
-    # for line in grammar_file:
-    #   if (len(line.strip()) > 0):
-    #     grammar.append(line.strip())
-    # solver = GrammarSolver(grammar)
-    # self.show_results(solver)
+    grammar = Array.new
+    grammar_file = File.new(filename, "r")
+    if !grammar_file
+      puts "Unable to open file!"
+    else
+      IO.foreach(filename){ |line|
+        if line.strip().length() > 0
+          grammar.push(line.strip())
+        end
+      }
+    end
+    solver = GrammarSolver(grammar)
+    show_results(solver)
   end
 
   def show_results(solver)
@@ -42,7 +49,3 @@ class GrammarMain
     end
   end
 end
-
-
-
-GrammarMain()
