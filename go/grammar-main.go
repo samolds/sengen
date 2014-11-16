@@ -15,58 +15,6 @@ func check(e error) {
 }
 
 
-func main() {
-  fmt.Println("Welcome to the cse143 random sentence generator.\n")
-
-  var filename string
-  fmt.Print("What is the name of the grammar file? ")
-  fmt.Scanf("%s", &filename)
-
-  file, err := os.Open(filename)
-  check(err)
-  var grammar []string
-  input := bufio.NewScanner(file)
-  for input.Scan() {
-    grammar = append(grammar, input.Text())
-  }
-  file.Close()
-
-  for _, gram := range grammar {
-    fmt.Println(gram)
-  }
-}
-
-
-
-
-//public class GrammarMain {
-//    public static void main(String[] args) throws FileNotFoundException {
-//        Scanner console = new Scanner(System.in);
-//        System.out.println("Welcome to the cse143 random sentence generator.");
-//        System.out.println();
-//
-//        // open grammar file
-//        System.out.print("What is the name of the grammar file? ");
-//        String fileName = console.nextLine();
-//        Scanner input = new Scanner(new File(fileName));
-//
-//        // read the grammar file and construct the grammar solver
-//        List<String> grammar = new ArrayList<String>();
-//        while (input.hasNextLine()) {
-//            String next = input.nextLine().trim();
-//            if (next.length() > 0)
-//                grammar.add(next);
-//        }
-//		  
-//		  
-//        GrammarSolver solver = 
-//            new GrammarSolver(Collections.unmodifiableList(grammar));
-//	
-//        showResults(console, solver);
-//    }
-//	 
-//    // pre : console open for console reading, solver initialized
-//    // post: allows the user to repeatedly pick a grammar element to generate
 //    public static void showResults(Scanner console, GrammarSolver solver) {
 //        boolean done = false;
 //        while (!done) {
@@ -98,4 +46,59 @@ func main() {
 //            }
 //        }
 //    }
-//}
+func show_results(solver) {
+  done := false
+  for !done {
+    fmt.Println("\nAvailable symbols to generate are:")
+    fmt.Println(get_symbols(solver))
+  }
+}
+
+
+//        Scanner console = new Scanner(System.in);
+//        System.out.println("Welcome to the cse143 random sentence generator.");
+//        System.out.println();
+//
+//        // open grammar file
+//        System.out.print("What is the name of the grammar file? ");
+//        String fileName = console.nextLine();
+//        Scanner input = new Scanner(new File(fileName));
+//
+//        // read the grammar file and construct the grammar solver
+//        List<String> grammar = new ArrayList<String>();
+//        while (input.hasNextLine()) {
+//            String next = input.nextLine().trim();
+//            if (next.length() > 0)
+//                grammar.add(next);
+//        }
+//		  
+//		  
+//        GrammarSolver solver = 
+//            new GrammarSolver(Collections.unmodifiableList(grammar));
+//	
+//        showResults(console, solver);
+func main() {
+  fmt.Println("Welcome to the cse143 random sentence generator.\n")
+
+  var filename string
+  fmt.Print("What is the name of the grammar file? ")
+  fmt.Scanf("%s", &filename)
+
+  file, err := os.Open(filename)
+  check(err)
+  var grammar []string
+  input := bufio.NewScanner(file)
+  for input.Scan() {
+    grammar = append(grammar, input.Text())
+  }
+  file.Close()
+
+  for _, gram := range grammar {
+    fmt.Println(gram)
+  }
+
+  solver := make(map[string]string)
+  build_solver(&solver, grammar)
+
+  show_results(solver)
+}
