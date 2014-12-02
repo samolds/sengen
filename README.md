@@ -33,5 +33,5 @@ Go
 --
 ```
 cd go
-go run grammar-main.go
+go run grammar-main.go grammar-solver.go
 ```
