@@ -17,28 +17,12 @@ func check(e error) {
 }
 
 
-//	public boolean grammarContains(String symbol) {
-//		return sentenceTree.containsKey(symbol);
-//	}
 func grammar_contains(symbol string, sentence_tree map[string][]string) bool {
   _, contains := sentence_tree[symbol]
   return contains
 }
 
 
-//	public String[] generate(String symbol, int times) {
-//		if (!grammarContains(symbol)) {
-//			throw new IllegalArgumentException("The given rule is not defined in your list.");
-//		}
-//		if (times < 0) {
-//			throw new IllegalArgumentException("I can't print something negative times.");
-//		}
-//		String[] phrases = new String[times];
-//		for (int i = 0; i < times; i++) { // building the array of random grammars
-//			phrases[i] = generatePhrase("", symbol);
-//		}
-//		return phrases;
-//	}
 func generate(symbol string, times int, sentence_tree map[string][]string) []string {
   if !grammar_contains(symbol, sentence_tree) {
     panic("The given rule is not defined in your list.")
@@ -54,18 +38,6 @@ func generate(symbol string, times int, sentence_tree map[string][]string) []str
 }
 
 
-//	private String generatePhrase(String phrase, String symbol) {
-//		if (!grammarContains(symbol)) { // if the symbol isn't in the keyset (base case)
-//			phrase = phrase + " " + symbol;
-//		} else { // if the symbol is in the keyset
-//			int randnum = (int)(Math.random() * (sentenceTree.get(symbol).length)); // grabs random one
-//			String[] symbols = sentenceTree.get(symbol)[randnum].split("[ \t]+"); 	// and splits it up
-//			for (int i = 0; i < symbols.length; i++) { // loops through each thing separated by space
-//				phrase = generatePhrase(phrase, symbols[i]);
-//			}
-//		}
-//		return phrase.trim();
-//	}
 func generate_phrase(phrase string, symbol string, sentence_tree map[string][]string) string {
   if !grammar_contains(symbol, sentence_tree) {
     phrase = phrase + " " + symbol
@@ -83,9 +55,6 @@ func generate_phrase(phrase string, symbol string, sentence_tree map[string][]st
 }
 
 
-//	public String getSymbols() {
-//		return sentenceTree.keySet().toString();
-//	}
 func get_symbols(sentence_tree map[string][]string) string {
   keys := make([]string, 0, len(sentence_tree))
   key_string := ""
@@ -133,22 +102,6 @@ func show_results(solver map[string][]string) {
 }
 
 
-//	public GrammarSolver(List<String> grammar) {
-//		if (grammar.isEmpty()) {
-//			throw new IllegalArgumentException("Your list is empty.");
-//		}
-//		sentenceTree = new TreeMap<String, String[]>();
-//		for (int i = 0; i < grammar.size(); i++) {
-//			String[] line = grammar.get(i).toString().split("::=");
-//			String grammarRule = line[0];
-//			if (grammarContains(grammarRule)) {
-//				throw new
-//					IllegalArgumentException("You have the same nonterminal defined more than once.");
-//			}
-//			String[] grammarMatch = line[1].trim().split("[|]+");
-//			sentenceTree.put(grammarRule, grammarMatch);
-//		}
-//	}
 func build_solver(grammar []string) map[string][]string {
   if len(grammar) == 0 {
     panic("Your list is empty.")
