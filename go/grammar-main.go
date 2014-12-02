@@ -72,7 +72,7 @@ func generate_phrase(phrase string, symbol string, sentence_tree map[string][]st
   } else {
     randnum := rand.Intn(len(sentence_tree[symbol]))
     tab_split := func(c rune) bool {
-      return c == '\t'
+      return c == '\t' || c == ' '
     }
     symbols := strings.FieldsFunc(sentence_tree[symbol][randnum], tab_split)
     for i := 0; i < len(symbols); i++ {
