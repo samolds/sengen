@@ -1,7 +1,7 @@
 Random Sentence Generator
 =========================
 
-In one of my early CS classes, we built a random sentence generator in Java. Initially, I ported it to Ruby and Go to freshen up on Ruby and learn Go. Now I plan on continuing to port it to C, C++, JavaScript, and maybe C# as a way of documenting all of the languages that I have learned.
+In one of my early CS classes, we built a random sentence generator in Java. Initially, I ported it to Ruby and Go to freshen up on Ruby and learn Go. Now I plan on continuing to port it to C, C++, JavaScript, and maybe C# to catalog all of the languages that I have learned.
 
 
 Java
