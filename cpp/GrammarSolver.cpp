@@ -5,10 +5,12 @@ using namespace std;
 
 
 /**
- * Description: Constructor that builds up a map of strings to a list of strings
+ * Description: Constructor that builds up a map from a list of lines matching the
+ *              syntax in the sentence.txt and formula.txt files. Maps a string
+ *              to a list of strings
  *
- *  Parameters: grammar:
- *              grammarSize:
+ *  Parameters: grammar: List of lines from the grammar file
+ *              grammarSize: Number of lines
  */
 GrammarSolver::GrammarSolver(string grammar[], int grammarSize) {
   if (grammarSize == 0) {
@@ -34,7 +36,7 @@ GrammarSolver::GrammarSolver(string grammar[], int grammarSize) {
 
 
 /**
- * Description: Deconstructor
+ * Description: Deconstructor that deletes list of strings from sentenceTree
  */
 GrammarSolver::~GrammarSolver() {
   for (sentenceTree_t::iterator iter(sentenceTree.begin()); iter != sentenceTree.end(); ++iter) {
@@ -44,9 +46,9 @@ GrammarSolver::~GrammarSolver() {
 
 
 /**
- * Description: 
+ * Description: Evaluates if a specific symbol is specified in a grammar
  *
- *  Parameters: symbol:
+ *  Parameters: symbol: the symbol to be searched for
  */
 bool GrammarSolver::grammarContains(string symbol) {
   return sentenceTree.count(symbol) != 0;
@@ -54,11 +56,12 @@ bool GrammarSolver::grammarContains(string symbol) {
 
 
 /**
- * Description: 
+ * Description: Generates a certain number of phrases according to the grammar rules
+ *              specified.
  *
- *  Parameters: symbol:
- *              phrases:
- *              times:
+ *  Parameters: symbol: The type of phrase to generate
+ *              phrases: The list that all of the generated phrases will be added to
+ *              times: The number of phrases to generate
  */
 void GrammarSolver::generate(string symbol, string * phrases, int times) {
   if (!grammarContains(symbol)) {
@@ -76,15 +79,36 @@ void GrammarSolver::generate(string symbol, string * phrases, int times) {
 
 
 /**
- * Description: 
+ * Description: Returns if a character is between '!' and '~' in the ascii table
  *
- *  Parameters: phrase:
- *              symbole:
+ *  Parameters: c: The character to evaluate
+ */
+bool invalidChar(char c) {
+  return !(c >= 33 && c <= 126);
+}
+
+
+/**
+ * Description: Removes all invalid characters from a string
+ *
+ *  Parameters: str: The string to remove characters from
+ */
+void strip(string & str) {
+  str.erase(remove_if(str.begin(), str.end(), invalidChar), str.end());
+}
+
+
+/**
+ * Description: Recursively builds up a random phrase
+ *
+ *  Parameters: phrase: The phrase being built
+ *              symbol: The type of phrase to generate
  */
 string GrammarSolver::generatePhrase(string phrase, string symbol) {
   int i, randnum, numSymbols = 0;
+  strip(symbol);
   if (!grammarContains(symbol)) {
-    phrase = phrase + " " + symbol;
+    phrase = phrase + symbol + " ";
   } else {
     i = 0;
     randnum = rand() % availGrams[symbol];
@@ -96,16 +120,13 @@ string GrammarSolver::generatePhrase(string phrase, string symbol) {
     delete [] symbols;
   }
 
-  if (phrase.size() > 0) {
-    phrase.erase(phrase.size() - 1);
-  }
   return phrase;
 }
 
 
 /**
- * Description: 
- *
+ * Description: Generates the list of keys from the sentenceTree map of available
+ *              types of phrases to construct.
  */
 string GrammarSolver::getSymbols() {
   string symbols;
@@ -118,21 +139,21 @@ string GrammarSolver::getSymbols() {
 
 
 /**
- * Description: 
+ * Description: Parses a string into a list of tokens with a delimiter.
  *
- *  Parameters: toParse:
- *              delimeter:
- *              tokens:
- *              numTokens:
+ *  Parameters: toParse: The string to parse
+ *              delimeter: The delimiter to parse with
+ *              tokens: The list of strings being found
+ *              maxTokens: The maximum allowed number of found tokens
  */
-int GrammarSolver::parse(string toParse, string delimiter, string * tokens, int numTokens) {
+int GrammarSolver::parse(string toParse, string delimiter, string * tokens, int maxTokens) {
   size_t pos = 0;
   int len = 0;
 
   while ((pos = toParse.find(delimiter)) != std::string::npos) {
     tokens[len++] = toParse.substr(0, pos);
     toParse.erase(0, pos + delimiter.length());
-    if (len >= numTokens) {
+    if (len >= maxTokens) {
       throw; // "Too many tokens!"
     }
   }

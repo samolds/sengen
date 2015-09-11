@@ -1,13 +1,13 @@
 all: GrammarMain.cpp
-	g++ -o run *.cpp
+	@g++ -o run *.cpp
 
 debug: GrammarMain.cpp
-	g++ -g *.cpp
+	@g++ -g *.cpp
 
 clean:
-	rm *.o *.out run
+	@rm run
 
 do:
-	make clean
-	make all
+	@make clean
+	@make all
 	./run

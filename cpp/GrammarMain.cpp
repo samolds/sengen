@@ -50,11 +50,9 @@ void showResults(GrammarSolver & solver) {
       } else {
         string * answers = new string[number];
         solver.generate(target, answers, number);
-        /*
         for (i = 0; i < number; i++) {
           cout << answers[i] << endl;
         }
-        */
         delete [] answers;
       }
     }

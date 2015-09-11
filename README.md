@@ -1,11 +1,11 @@
-Random Sentence Generator
-=========================
+# Random Sentence Generator
 
-In one of my early CS classes, we built a random sentence generator in Java. Initially, I ported it to Ruby and Go to freshen up on Ruby and learn Go. Now I plan on continuing to port it to C, C++, JavaScript, and maybe C# to catalog all of the languages that I have learned.
+In one of my early CS classes, we built a random sentence generator in Java. I've been porting
+the same program to multiple languages as a learning opportunity and to provide myself with a
+catalog of differences among implementations and styles.
 
 
-Java
-----
+### Java
 ```
 cd java
 javac GrammarMain.java
@@ -13,25 +13,37 @@ java GrammarMain
 ```
 
 
-Python
-------
+### Python
 ```
 cd python
 python grammar_main.py
 ```
 
 
-Ruby
-----
+### Ruby
 ```
 cd ruby
 ruby GrammarMain.rb
 ```
 
 
-Go
---
+### Go
 ```
 cd go
 go run grammar-main.go grammar-solver.go
 ```
+
+
+### C++
+```
+cd cpp
+make
+./run
+```
+
+
+#### Upcoming
+* C
+* JavaScript
+* Rust
+* C#??
