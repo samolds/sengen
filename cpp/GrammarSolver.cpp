@@ -150,7 +150,7 @@ int GrammarSolver::parse(string toParse, string delimiter, string * tokens, int 
   size_t pos = 0;
   int len = 0;
 
-  while ((pos = toParse.find(delimiter)) != std::string::npos) {
+  while ((pos = toParse.find(delimiter)) != string::npos) {
     tokens[len++] = toParse.substr(0, pos);
     toParse.erase(0, pos + delimiter.length());
     if (len >= maxTokens) {
