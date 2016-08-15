@@ -3,3 +3,6 @@
 *.DS_Store
 *.swp
 run
+
+rust/Cargo.lock
+rust/target/

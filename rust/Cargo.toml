@@ -1,0 +1,7 @@
+[package]
+name = "sengen"
+version = "1.0.0"
+authors = ["Sam Olds <samolds@gmail.com>"]
+
+[dependencies]
+rand = "0.3.0"

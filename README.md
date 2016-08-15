@@ -1,8 +1,12 @@
 # Random Sentence Generator
 
-In one of my early CS classes, we built a random sentence generator in Java. I've been porting
-the same program to multiple languages as a learning opportunity and to provide myself with a
-catalog of differences among implementations and styles.
+In one of my early CS classes, we built a random sentence generator in Java.
+I've been porting the same program to multiple languages as a learning
+opportunity and to provide myself with a catalog of differences among
+implementations and styles.
+
+If I'm doing something really ugly/wrong/non-idiomatic, in a specific language,
+please let me know.
 
 
 ### Java
@@ -42,8 +46,15 @@ make
 ```
 
 
+### Rust
+```
+cd rust
+cargo run
+```
+
+
 #### Upcoming
+* Haskell
 * C
 * JavaScript
-* Rust
-* C#??
+* C#?? (Probably not)
