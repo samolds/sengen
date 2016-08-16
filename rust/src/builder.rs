@@ -1,4 +1,5 @@
 extern crate rand;
+use self::rand::distributions::{IndependentSample, Range};
 use std::collections::HashMap;
 
 
@@ -15,13 +16,59 @@ pub fn grammar_contains<'a>(grammar: &str, sentence_tree: &Solver) -> bool {
 }
 
 
-pub fn get_symbols<'a>(sentence_tree: &Solver) -> &'a str {
-  return "Hello";
+pub fn generate<'a>(target: &'a str, number: i32, sentence_tree: &Solver) -> Result<Vec<String>, &'static str> {
+  if !grammar_contains(target, sentence_tree) {
+    return Err("The given rule is not defined in your list.");
+  }
+
+  if number < 0 {
+    return Err("I can't print something negative times.");
+  }
+
+  let mut phrases = Vec::new();
+  for _ in 0..number {
+    phrases.push(generate_phrase("".to_string(), target, sentence_tree));
+  }
+
+  return Ok(phrases);
 }
 
 
-pub fn generate<'a>(target: &'a str, number: i32, sentence_tree: &Solver) -> Result<Vec<&'a str>, &'static str> {
-  return Ok(vec!(target));
+fn pick(a: i32, b: i32) -> i32 {
+  let between = Range::new(a, b);
+  let mut rng = rand::thread_rng();
+  return between.ind_sample(&mut rng);
+}
+
+
+fn generate_phrase<'a>(mut phrase: String, symbol: &'a str, sentence_tree: &Solver) -> String {
+  if !grammar_contains(symbol, sentence_tree) {
+    phrase.push(' ');
+    phrase.push_str(symbol);
+  } else {
+    let randnum: i32 = pick(0, sentence_tree[symbol].len() as i32);
+    let mut symbols_iter = sentence_tree[symbol][randnum as usize].split_whitespace();
+
+    loop {
+      phrase = match symbols_iter.next() {
+        None => break,
+        Some(sym) => generate_phrase(phrase, sym, sentence_tree),
+      };
+    }
+  }
+
+  return phrase.trim().to_string();
+}
+
+
+pub fn get_symbols<'a>(sentence_tree: &Solver) -> String {
+  let mut keys = String::new();
+  for key in sentence_tree.keys() {
+    keys.push_str(key);
+    keys.push(' ');
+  }
+
+  return keys.trim().to_string();
 }
 
 
@@ -37,6 +84,10 @@ pub fn build_solver<'a>(grammar_str: &'a str) -> Result<Solver, &'static str> {
   let grammar_lines = grammar_str.split("\n");
   for grammar_line in grammar_lines {
     let line: Vec<&str> = grammar_line.split("::=").collect();
+
+    if line.len() < 2 {
+      continue;
+    }
 
     if grammar_contains(line[0], &sentence_tree) {
       return Err("You have the same nonterminal defined more than once.");
@@ -54,9 +105,10 @@ pub fn build_solver<'a>(grammar_str: &'a str) -> Result<Solver, &'static str> {
 #[cfg(test)]
 mod test {
   use std::collections::HashMap;
-  use std::result::Result;
   use builder::Solver;
   use builder;
+
+  // TODO: Add more tests
 
   #[test]
   fn basic() {
