@@ -1,10 +1,3 @@
-// Stuart Reges
-// 3/10/04
-//
-// GrammarMain contains a main program that prompts a user for the name of a
-// grammar file and then gives the user the opportunity to generate random
-// versions of various elements of the grammar.
-
 import java.io.*;
 import java.util.*;
 
@@ -14,12 +7,10 @@ public class GrammarMain {
         System.out.println("Welcome to the cse143 random sentence generator.");
         System.out.println();
 
-        // open grammar file
         System.out.print("What is the name of the grammar file? ");
         String fileName = console.nextLine();
         Scanner input = new Scanner(new File(fileName));
 
-        // read the grammar file and construct the grammar solver
         List<String> grammar = new ArrayList<String>();
         while (input.hasNextLine()) {
             String next = input.nextLine().trim();
@@ -34,8 +25,6 @@ public class GrammarMain {
         showResults(console, solver);
     }
 	 
-    // pre : console open for console reading, solver initialized
-    // post: allows the user to repeatedly pick a grammar element to generate
     public static void showResults(Scanner console, GrammarSolver solver) {
         boolean done = false;
         while (!done) {
